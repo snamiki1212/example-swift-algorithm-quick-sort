@@ -22,8 +22,10 @@ func quickSortSlow<T: Comparable>(_ arr: [T]) -> [T] {
 // Time Complexity: O(N lgN) -> technically O(N^2) in the worst case
 // Space Complexity: O(1)
 func quickSort<T: Comparable>(_ arr: inout [T], _ start: Int, _ end: Int) {
-  // TODO
-    
+    guard(start < end) else { return }
+    let mid = partition(&arr, start, end)
+    quickSort(&arr, start, mid - 1) // left side
+    quickSort(&arr, mid + 1, end) // right side
 }
 
 /// Returns the index of the pivot
@@ -33,7 +35,19 @@ func quickSort<T: Comparable>(_ arr: inout [T], _ start: Int, _ end: Int) {
 ///   - end: the end index
 /// - Returns: the index of the pivot after partitioning
 func partition<T: Comparable>(_ arr: inout [T], _ start: Int, _ end: Int) -> Int {
-    // TODO
-    return 0
+    var head = start
+    var tail = end
+    let pivot = end
+    
+    if(tail < 0) { return head }
+    
+    while(head < tail){
+        while(arr[head] <  arr[pivot] && head < tail) { head += 1 } // head
+        while(arr[tail] >= arr[pivot] && head < tail) { tail -= 1 } // tail
+        if(head == tail) { break }
+        arr.swapAt(head, tail)
+    }
+    if(arr[head] > arr[pivot]) { arr.swapAt(head, pivot) }
+    return head
 }
 

@@ -8,12 +8,48 @@
 import Foundation
 
 
-
+let sample1   = [3,1,2,6,4,7,8,5]
 print(
     "quickSortSlow: ",
     isSame(
-        quickSortSlow([3,1,2,6,4,7,8,5]),
-        [1,2,3,4,5,6,7,8,]
+        quickSortSlow(sample1),
+        sample1.sorted()
+    )
+)
+
+
+
+var sample2   = [3,1,2,6,4,7,8,5]
+let expected2 = sample2.sorted()
+quickSort(&sample2, 0, sample2.count-1)
+print(
+    "quicksort: ",
+    isSame(
+        sample2,
+        expected2
+    )
+)
+
+var sample3   = [1,5,1,5,1,5,1,5]
+let exceted3  = sample3.sorted()
+quickSort(&sample3, 0, sample3.count-1)
+print(
+    "quicksort: ",
+    isSame(
+        sample3,
+        exceted3
+    )
+)
+
+
+var sample4   = [9,8,7,6,5,4,3,2,1]
+let exceted4  = sample4.sorted()
+quickSort(&sample4, 0, sample4.count-1)
+print(
+    "quicksort: ",
+    isSame(
+        sample4,
+        exceted4
     )
 )
 
