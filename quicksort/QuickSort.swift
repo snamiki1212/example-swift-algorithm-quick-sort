@@ -25,7 +25,7 @@ func quickSort<T: Comparable>(_ arr: inout [T], _ start: Int, _ end: Int) {
     guard(start < end) else { return }
     let mid = partition(&arr, start, end)
     quickSort(&arr, start, mid - 1) // left side
-    quickSort(&arr, mid + 1, end) // right side
+    quickSort(&arr, mid + 1, end)   // right side
 }
 
 /// Returns the index of the pivot
@@ -38,16 +38,17 @@ func partition<T: Comparable>(_ arr: inout [T], _ start: Int, _ end: Int) -> Int
     var head = start
     var tail = end
     let pivot = end
-    
-    if(tail < 0) { return head }
+
+    guard (tail >= 0)    else { return head }
+    guard (start <= end) else { return head }
     
     while(head < tail){
         while(arr[head] <  arr[pivot] && head < tail) { head += 1 } // head
         while(arr[tail] >= arr[pivot] && head < tail) { tail -= 1 } // tail
         if(head == tail) { break }
-        arr.swapAt(head, tail)
+        if(arr[head] != arr[tail]) { arr.swapAt(head, tail) }
     }
-    if(arr[head] > arr[pivot]) { arr.swapAt(head, pivot) }
+    if head != pivot { arr.swapAt(head, pivot) }
     return head
 }
 
